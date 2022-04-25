@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  server:
+    build: .
+    image: node-systemd-timer-server:latest
+    container_name: node-systemd-timer
+    privileged: true
+    tty: true
+    entrypoint: ["/usr/sbin/init"]
+    command: yarn generate
+    volumes:
+      - ./.docker/server/journald.conf:/etc/systemd/journald.conf
+      - .:/home/ec2-user/node-systemd-timer
